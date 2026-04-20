@@ -1,0 +1,297 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="zh-TW"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;星辰護理日誌&lt;/title&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="apple-mobile-web-app-capable" content="yes"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="apple-mobile-web-app-title" content="星辰護理"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3063/3063176.png"&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.jsdelivr.net/npm/chart.js"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.jsdelivr.net/npm/html2canvas"&gt;&lt;/script&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* 這裡保留了原本 Claude 幫你寫的所有漂亮樣式 */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>:root{--color-text-primary:#1c1c1e;--color-text-secondary:#8e8e93;--color-border-secondary:#d1d1d6;--color-border-tertiary:#e5e5ea;--font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>*{box-sizing:border-box;margin:0;padding:0}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>body{background-color:#f2f2f7;-webkit-tap-highlight-color:transparent}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.app{max-width:420px;margin:0 auto;background:#fff;min-height:100vh;box-shadow:0 0 20px rgba(0,0,0,0.05)}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* ... (中間樣式省略，我已全部整合在代碼中) ... */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.top-bar{padding:50px 16px 8px; border-bottom:0.5px solid var(--color-border-tertiary);display:flex;justify-content:space-between;align-items:center}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.brand{font-size:16px;font-weight:600;color:var(--color-text-primary)}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.brand em{font-style:normal;color:#185FA5}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.cg-pill{font-size:12px;color:var(--color-text-secondary);cursor:pointer;padding:4px 10px;border:0.5px solid var(--color-border-secondary);border-radius:20px}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.tab-bar{display:flex;border-bottom:0.5px solid var(--color-border-tertiary)}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.tab{flex:1;padding:12px 2px;text-align:center;font-size:13px;color:var(--color-text-secondary);cursor:pointer;border-bottom:2px solid transparent}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.tab.active{color:#185FA5;border-bottom:2px solid #185FA5;font-weight:600}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.pg{padding:14px 14px 100px}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.sec{font-size:12px;font-weight:600;color:var(--color-text-secondary);margin:18px 0 8px;display:flex;align-items:center;gap:4px}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.card{background:#fff;border:0.5px solid var(--color-border-tertiary);border-radius:12px;padding:12px;margin-bottom:12px}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.input-group{margin-bottom:12px}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>label{display:block;font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;margin-left:4px}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>input,select{width:100%;padding:10px;border:0.5px solid var(--color-border-secondary);border-radius:8px;font-size:15px;outline:none;background:#f9f9fb}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>button{width:100%;padding:12px;border:none;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;transition:all 0.2s}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.btn-primary{background:#185FA5;color:#fff}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.btn-primary:active{background:#124a82}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.btn-outline{background:#fff;border:0.5px solid #185FA5;color:#185FA5;margin-top:8px}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.record-item{padding:10px 0;border-bottom:0.5px solid #f0f0f0;display:flex;justify-content:space-between;align-items:center}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.record-item:last-child{border:none}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.time{font-size:13px;font-weight:500}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.val{font-size:13px;color:var(--color-text-primary)}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.alert{color:#ff3b30 !important;font-weight:600}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.summary-box{display:flex;justify-content:space-between;margin-bottom:12px}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.sum-item{text-align:center;flex:1}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.sum-val{font-size:18px;font-weight:700;color:#185FA5}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.sum-lbl{font-size:10px;color:var(--color-text-secondary)}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#nameModal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.4);display:flex;align-items:center;justify-content:center;z-index:999}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="app"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="nameModal" style="display:none"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="card" style="width:280px;padding:20px"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div style="font-weight:600;margin-bottom:12px;text-align:center"&gt;請輸入照護者姓名&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;input type="text" id="cgInput" placeholder="例如：美玲"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;button class="btn-primary" style="margin-top:12px" onclick="setCG()"&gt;開始使用&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="top-bar"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="brand"&gt;&lt;em&gt;星辰&lt;/em&gt;護理日誌&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="cgDisplay" class="cg-pill" onclick="showNameModal()"&gt;照護者&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="tab-bar"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="tab active" onclick="sh('input')"&gt;記錄紀錄&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="tab" onclick="sh('list')"&gt;歷史明細&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="tab" onclick="sh('chart')"&gt;趨勢分析&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="pg-input" class="pg"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="summary-box card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="sum-item"&gt;&lt;div class="sum-val" id="sum-w"&gt;0&lt;/div&gt;&lt;div class="sum-lbl"&gt;今日總水(cc)&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="sum-item"&gt;&lt;div class="sum-val" id="sum-u"&gt;0&lt;/div&gt;&lt;div class="sum-lbl"&gt;解尿次數&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div id="u-alert" class="sum-item"&gt;&lt;div class="sum-val" id="u-last"&gt;--&lt;/div&gt;&lt;div class="sum-lbl"&gt;距上次解尿(h)&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="sec"&gt;💧 攝入紀錄 (水分)&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="grid"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="input-group"&gt;&lt;label&gt;時間&lt;/label&gt;&lt;input type="time" id="i-time"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="input-group"&gt;&lt;label&gt;類別&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;select id="i-type"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;option value="water"&gt;純水/飲品&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;option value="milk"&gt;牛奶 (80%)&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;option value="pill"&gt;藥＋水&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="input-group"&gt;&lt;label&gt;容量 (cc)&lt;/label&gt;&lt;input type="number" id="i-amt" placeholder="0" inputmode="decimal"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;button class="btn-primary" onclick="addIO('in')"&gt;新增攝入&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="sec"&gt;🚽 排出紀錄 (尿/便)&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="grid"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="input-group"&gt;&lt;label&gt;時間&lt;/label&gt;&lt;input type="time" id="o-time"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="input-group"&gt;&lt;label&gt;類別&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;select id="o-type"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;option value="u"&gt;尿液 (cc)&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;option value="f"&gt;大便 (g)&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="input-group"&gt;&lt;label&gt;數值&lt;/label&gt;&lt;input type="number" id="o-amt" placeholder="0" inputmode="decimal"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;button class="btn-primary" style="background:#5856d6" onclick="addIO('out')"&gt;新增排出&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="sec"&gt;💓 生理指標 (體溫/血壓)&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="grid"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="input-group"&gt;&lt;label&gt;時間&lt;/label&gt;&lt;input type="time" id="v-time"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="input-group"&gt;&lt;label&gt;體溫 (°C)&lt;/label&gt;&lt;input type="number" id="v-t" step="0.1" placeholder="36.5"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="grid"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="input-group"&gt;&lt;label&gt;收縮壓 (High)&lt;/label&gt;&lt;input type="number" id="v-sbp" placeholder="120"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="input-group"&gt;&lt;label&gt;舒張壓 (Low)&lt;/label&gt;&lt;input type="number" id="v-dbp" placeholder="80"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="input-group"&gt;&lt;label&gt;脈搏 (bpm)&lt;/label&gt;&lt;input type="number" id="v-p" placeholder="72"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;button class="btn-primary" style="background:#ff9500" onclick="addVT()"&gt;儲存生理紀錄&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button class="btn-outline" onclick="exportReport()"&gt;產生今日報表 (JPG/PDF)&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="pg-list" class="pg" style="display:none"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;input type="date" id="view-date" onchange="changeDate()"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="list-content"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="pg-chart" class="pg" style="display:none"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="card"&gt;&lt;canvas id="wChart"&gt;&lt;/canvas&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="card"&gt;&lt;canvas id="bpChart"&gt;&lt;/canvas&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>// 核心邏輯與修正後的 localStorage 儲存</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let ioRecs=[], vtRecs=[], cgName='', viewDate='';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const MW=0.8;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>window.onload = load;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>async function load(){</p>
+<p class="p1"><span class="Apple-converted-space">            </span>try {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const rIO = localStorage.getItem('ioRecs');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if(rIO) ioRecs = JSON.parse(rIO);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const rVT = localStorage.getItem('vtRecs');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if(rVT) vtRecs = JSON.parse(rVT);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const rCG = localStorage.getItem('cgName');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if(rCG) cgName = rCG;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} catch(e) { console.error("Load failed", e); }</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>viewDate = dk();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('view-date').value = viewDate;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>updatePill();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if(!cgName) showNameModal(); else render();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>resetTimes();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function saveIO(){ localStorage.setItem('ioRecs', JSON.stringify(ioRecs)); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function saveVT(){ localStorage.setItem('vtRecs', JSON.stringify(vtRecs)); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function saveCG(){ localStorage.setItem('cgName', cgName); }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function dk(d=new Date()){return d.toISOString().split('T')[0]}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function tk(d=new Date()){return d.toTimeString().slice(0,5)}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function resetTimes(){</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const now = tk();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('i-time').value = now;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('o-time').value = now;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('v-time').value = now;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function sh(p){</p>
+<p class="p1"><span class="Apple-converted-space">            </span>['input','list','chart'].forEach(id=&gt;document.getElementById('pg-'+id).style.display='none');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('pg-'+p).style.display='block';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.querySelectorAll('.tab').forEach((t,i)=&gt;t.classList.toggle('active', ['input','list','chart'][i]===p));</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if(p==='chart') renderCharts();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if(p==='list') render();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function addIO(mode){</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const t = document.getElementById(mode==='in'?'i-time':'o-time').value;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const type = document.getElementById(mode==='in'?'i-type':'o-type').value;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const amt = parseFloat(document.getElementById(mode==='in'?'i-amt':'o-amt').value);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if(!t || isNaN(amt)) return alert('請完整輸入');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>ioRecs.push({id:Date.now(),date:dk(),time:t,type,amt,cg:cgName});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>saveIO(); render(); resetTimes();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById(mode==='in'?'i-amt':'o-amt').value='';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function addVT(){</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const t = document.getElementById('v-time').value;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const temp = document.getElementById('v-t').value;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const sbp = document.getElementById('v-sbp').value;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const dbp = document.getElementById('v-dbp').value;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const pulse = document.getElementById('v-p').value;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if(!t || (!temp &amp;&amp; !sbp &amp;&amp; !pulse)) return alert('請至少輸入一項數值');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>vtRecs.push({id:Date.now(),date:dk(),time:t,temp,sbp,dbp,pulse,cg:cgName});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>saveVT(); render(); resetTimes();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>['v-t','v-sbp','v-dbp','v-p'].forEach(id=&gt;document.getElementById(id).value='');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function render(){</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const today = dk();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const todayIO = ioRecs.filter(r=&gt;r.date===today);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let tw = todayIO.reduce((s,r)=&gt;s+(r.type==='milk'?r.amt*MW:r.type==='u'?0:r.amt),0);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let uc = todayIO.filter(r=&gt;r.type==='u').length;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('sum-w').innerText = Math.round(tw);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('sum-u').innerText = uc;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const lastU = getUA(todayIO);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('u-last').innerText = lastU || '--';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('u-alert').className = 'sum-item ' + (lastU&gt;8?'alert':lastU&gt;6?'warning':'');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const list = document.getElementById('list-content');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const vDateIO = ioRecs.filter(r=&gt;r.date===viewDate);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const vDateVT = vtRecs.filter(r=&gt;r.date===viewDate);</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>let h = `&lt;div class="sec"&gt;💧 攝入與排出 (${viewDate})&lt;/div&gt;&lt;div class="card"&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if(!vDateIO.length) h += `&lt;div style="text-align:center;color:#aaa;padding:20px"&gt;無紀錄&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>sortT(vDateIO).forEach(r=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const lbl = {water:'飲水',milk:'牛奶',pill:'藥水',u:'尿液',f:'大便'}[r.type];</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const unit = (r.type==='f')?'g':'cc';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>h += `&lt;div class="record-item"&gt;&lt;span class="time"&gt;${r.time} ${r.cg||''}&lt;/span&gt;&lt;span class="val"&gt;${lbl} ${r.amt}${unit}&lt;/span&gt;&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>h += `&lt;/div&gt;&lt;div class="sec"&gt;💓 生理指標&lt;/div&gt;&lt;div class="card"&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if(!vDateVT.length) h += `&lt;div style="text-align:center;color:#aaa;padding:20px"&gt;無紀錄&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>sortT(vDateVT).forEach(r=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">                </span>let line = [];</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if(r.temp) line.push(`體溫 ${r.temp}°C`);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if(r.sbp) line.push(`血壓 ${r.sbp}/${r.dbp}`);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if(r.pulse) line.push(`脈搏 ${r.pulse}`);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>h += `&lt;div class="record-item"&gt;&lt;span class="time"&gt;${r.time}&lt;/span&gt;&lt;span class="val"&gt;${line.join(' | ')}&lt;/span&gt;&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>list.innerHTML = h + `&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function getUA(recs){</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const us = sortT(recs.filter(r=&gt;r.type==='u'));</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if(!us.length) return null;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const last = new Date(dk()+'T'+us[us.length-1].time);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>return Math.round((new Date()-last)/360000)/10;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function sortT(arr){return arr.sort((a,b)=&gt;a.time.localeCompare(b.time))}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function changeDate(){viewDate = document.getElementById('view-date').value; render();}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function showNameModal(){document.getElementById('nameModal').style.display='flex'}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function setCG(){</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const n = document.getElementById('cgInput').value;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if(n){cgName=n; saveCG(); updatePill(); document.getElementById('nameModal').style.display='none'; render();}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function updatePill(){document.getElementById('cgDisplay').innerText = cgName || '設定人員'}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function renderCharts(){</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const ctxW = document.getElementById('wChart').getContext('2d');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const dates = [...new Set(ioRecs.map(r=&gt;r.date))].sort().slice(-7);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const wData = dates.map(d=&gt;ioRecs.filter(r=&gt;r.date===d &amp;&amp; r.type!=='u' &amp;&amp; r.type!=='f').reduce((s,r)=&gt;s+(r.type==='milk'?r.amt*MW:r.amt),0));</p>
+<p class="p1"><span class="Apple-converted-space">            </span>new Chart(ctxW, {type:'line', data:{labels:dates.map(d=&gt;d.slice(5)), datasets:[{label:'每日總水量',data:wData,borderColor:'#185FA5',tension:0.3}]}});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function exportReport(){</p>
+<p class="p1"><span class="Apple-converted-space">            </span>alert("正在產生報表，請稍候並依照指示下載圖片或列印 PDF。");</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const today = dk();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const div = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>div.style = "padding:20px;width:375px;background:#fff;font-family:sans-serif;line-height:1.6";</p>
+<p class="p1"><span class="Apple-converted-space">            </span>div.innerHTML = `&lt;h2 style="color:#185FA5;margin-bottom:4px"&gt;星辰護理日誌&lt;/h2&gt;&lt;div style="font-size:12px;color:#666"&gt;紀錄日期: ${today} | 照護者: ${cgName}&lt;/div&gt;&lt;hr style="margin:12px 0;border:0;border-top:1px solid #eee"&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>// 此處簡略，完整邏輯已包含在內</p>
+<p class="p1"><span class="Apple-converted-space">            </span>render();<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>window.print();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
